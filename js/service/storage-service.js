@@ -1,4 +1,4 @@
-
+'use strict'
 
 function saveToStorage(key, value) {
     const json = JSON.stringify(value)

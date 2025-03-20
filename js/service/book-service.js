@@ -1,13 +1,42 @@
 'use strict'
 
 
+const STORAGE_KEY = 'bookShopDB'
+
+
 var gBooks = [
-    { id: 'bg4J78', title: 'The Adventures of Lori Ipsi', price: 120, imgUrl: 'img/lori-ipsi.jpg' },
-    { id: 'gh6K89', title: 'JavaScript for Beginners', price: 95, imgUrl: 'img/js-beginners.jpg' }
+    { id: 'bg4J78', title: 'The Adventures of Lori IpsiA', price: 129, imgUrl: 'img/lori-ipsi.jpg' },
+    { id: 'gh6K89', title: 'JavaScript for BeginnersA', price: 99, imgUrl: 'img/js-beginners.jpg' }
 ];
 
+function _createBooks() {
+    var storedBooks = loadFromStorage(STORAGE_KEY)
+
+    if (!storedBooks || storedBooks.length === 0) { 
+        saveToStorage(STORAGE_KEY, gBooks)
+    } else {
+        gBooks = storedBooks;
+    }
+}
+
+_createBooks()
+renderBooks()
+
+function _createBook(title, price, imgUrl) {
+    return {
+        id: makeId(),
+        title,
+        price,
+        imgUrl
+    }
+}
+
+function _saveBooks() {
+    saveToStorage(STORAGE_KEY, gBooks)
+}
+
 function getBooks() {
-    return gBooks;
+    return gBooks
 }
 
 function removeBook(bookid) {
@@ -15,6 +44,8 @@ function removeBook(bookid) {
 
     if(bookIdx !== -1){
         gBooks.splice(bookIdx, 1)
+        _saveBooks()
+        renderBooks()
     }
 }
 
@@ -25,6 +56,8 @@ function updateBook(bookid, newPrice){
     if(!newPrice || newPrice <= 0) return console.log('Error: please enter valid price!')
 
     gBooks[bookIdx].price = newPrice
+    _saveBooks()
+    renderBooks()
 }
 
 function addBook() {
@@ -40,6 +73,8 @@ function addBook() {
 
     if (!newBookTitle || !newBookPrice || newBookPrice <= 0 ) return console.log('Error: please try again!')
     gBooks.push(newBook)
+    _saveBooks()
+    renderBooks()
 }
 
 function getBookById(bookid) {
