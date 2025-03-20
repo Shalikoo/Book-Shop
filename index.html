@@ -8,8 +8,18 @@
 </head>
 
 <body onload="onInit()">
-    <h1>Book Shop</h1>
+
+    <div id="bookDetailsModal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2 id="modalTitle"></h2>
+            <img id="modalImg" src="" alt="Book Image">
+            <p id="modalPrice"></p>
+        </div>
+    </div>
     
+
+    <h1>Book Shop</h1>
     <button onclick="onAddBook()">Add Book</button>
     
     <table border="1">

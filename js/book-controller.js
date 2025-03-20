@@ -34,3 +34,19 @@ function onAddBook() {
     addBook()
     renderBooks()
 }
+
+function onReadBook(bookid) {
+    var book = getBookById(bookid)
+    if(!book) return console.log('Error: book not found!')
+
+    document.querySelector('#modalTitle').innerText = book.title
+    document.querySelector('#modalPrice').innerText = 'Price: ' + book.price
+    document.querySelector('#modalImg').src = book.imgUrl || 'default.png'
+
+    document.querySelector('#bookDetailsModal').style.display = 'flex';
+    
+}
+
+function closeModal() {
+    document.querySelector('#bookDetailsModal').style.display = 'none'
+}

@@ -2,8 +2,8 @@
 
 
 var gBooks = [
-    { id: 'bg4J78', title: 'The Adventures of Lori Ipsi', price: 120, imgUrl: 'lori-ipsi.jpg' },
-    { id: 'gh6K89', title: 'JavaScript for Beginners', price: 95, imgUrl: 'js-beginners.jpg' }
+    { id: 'bg4J78', title: 'The Adventures of Lori Ipsi', price: 120, imgUrl: 'img/lori-ipsi.jpg' },
+    { id: 'gh6K89', title: 'JavaScript for Beginners', price: 95, imgUrl: 'img/js-beginners.jpg' }
 ];
 
 function getBooks() {
@@ -40,4 +40,8 @@ function addBook() {
 
     if (!newBookTitle || !newBookPrice || newBookPrice <= 0 ) return console.log('Error: please try again!')
     gBooks.push(newBook)
+}
+
+function getBookById(bookid) {
+    return gBooks.find(book => book.id === bookid)
 }
