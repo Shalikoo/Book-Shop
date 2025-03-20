@@ -19,3 +19,18 @@ function renderBooks() {
         `)
         document.querySelector('tbody').innerHTML = strHTMLs.join('')
 }
+
+function onRemoveBook(bookid) {
+    removeBook(bookid)
+    renderBooks()
+}
+
+function onUpdateBook(bookid) {
+    updateBook(bookid)
+    renderBooks()
+}
+
+function onAddBook() {
+    addBook()
+    renderBooks()
+}
