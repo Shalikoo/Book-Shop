@@ -115,6 +115,65 @@ function onClearFilter() {
     renderStats()
 }
 
+function _filterBooks(filterBy) {
+    var books = gBooks
+    if (filterBy.title) {
+        books = books.filter(book => book.title.includes(gFilterBy.title))
+    }
+    if (filterBy.minRating) {
+        books = books.filter(book => book.minRating >= gFilterBy.minRating)
+    }
+    return books
+}
+
+function getPageCount(options) {
+    const page = options.page
+    const filterBy = options.filterBy
+    // console.log('page:', page)
+    // console.log('gCars:', gCars)
+
+    const books = _filterBooks(filterBy)
+    // console.log('cars:', cars)
+
+    const pageCount = Math.ceil(books.length / page.size)
+    // console.log('pageCount:', pageCount)
+    return pageCount
+}
+
+function onNextPage() {
+    // console.log('Getting next page...')
+
+    const pageCount = getPageCount(gFilterBy)
+
+    if (gFilterBy.page.idx === pageCount - 1) {
+        gFilterBy.page.idx = 0
+    } else {
+        gFilterBy.page.idx++
+    }
+
+    // console.log('gQueryOptions.page:', gQueryOptions.page)
+    renderStats()
+    renderBooks()
+    setQueryParams()
+}
+
+function onPrevPage() {
+    // console.log('Getting next page...')
+
+    const pageCount = getPageCount(gFilterBy)
+
+    if (gFilterBy.page.idx <= 0) {
+        gFilterBy.page.idx = pageCount - 1
+    } else {
+        gFilterBy.page.idx--
+    }
+
+    // console.log('gQueryOptions.page:', gQueryOptions.page)
+    renderStats()
+    renderBooks()
+    setQueryParams()
+}
+
 // Query Params
 
 function readQueryParams() {
