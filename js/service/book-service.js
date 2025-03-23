@@ -4,8 +4,9 @@
 const STORAGE_KEY = 'bookShopDB'
 
 var gFilterBy = {
-    title: '',
-    minRating: 0
+    filterBy: {title: '', minRating: 0},
+    sortBy: {},
+    page: { idx: 0, size: 5 }
 }
 
 var gBooks = [
@@ -42,8 +43,8 @@ function _saveBooks() {
 
 function getBooks() {
     return gBooks.filter(book =>
-        book.title.toLowerCase().includes(gFilterBy.title.toLowerCase()) &&
-        book.rating >= gFilterBy.minRating
+        book.title.toLowerCase().includes(gFilterBy.filterBy.title.toLowerCase()) &&
+        book.rating >= gFilterBy.filterBy.minRating
     );
 }
 
