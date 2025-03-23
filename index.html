@@ -15,14 +15,32 @@
             <h2 id="modalTitle"></h2>
             <img id="modalImg" src="" alt="Book Image">
             <p id="modalPrice"></p>
+            <p id="modalRating"></p>
         </div>
     </div>
     
 
     <h1>Book Shop</h1>
     <button onclick="onAddBook()">Add Book</button>
-    <input type="text" class="search" placeholder="Search by title" oninput="onSetFilter(this.value)">
-    <button onclick="onClearFilter()">Clear</button>
+
+    <fieldset class="filters">
+        <legend>Filter Books</legend>
+      
+        <input type="text" class="search" placeholder="Search by title" oninput="onSetFilter(this.value)">
+        
+        <select class="min-rating" onchange="onSetFilterByRating(this.value)">
+          <option value="0">All Ratings</option>
+          <option value="1">1+ Stars</option>
+          <option value="2">2+ Stars</option>
+          <option value="3">3+ Stars</option>
+          <option value="4">4+ Stars</option>
+          <option value="5">5 Stars</option>
+        </select>
+      
+        <button onclick="onClearFilter()">Clear</button>
+      </fieldset>
+      
+    
 
     <div id="msg" class="msg hidden"></div>
 
@@ -31,6 +49,7 @@
             <tr>
                 <th>Title</th>
                 <th>Price</th>
+                <th>Rating ⭐</th>
                 <th>Actions</th>
             </tr>
         </thead>

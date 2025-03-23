@@ -1,26 +1,67 @@
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin: 20px 0;
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', sans-serif;
 }
-th, td {
-    border: 1px solid #ddd;
-    padding: 8px;
+
+body {
+    background-color: #f8f9fa;
+    padding: 30px;
+    color: #212529;
+}
+
+h1 {
     text-align: center;
+    margin-bottom: 30px;
+    font-size: 2.5rem;
+    color: #007BFF;
 }
-th {
-    background-color: #f4f4f4;
-}
+
 button {
-    padding: 5px 10px;
+    padding: 8px 16px;
     background-color: #007BFF;
     color: white;
     border: none;
-    border-radius: 4px;
+    border-radius: 6px;
     cursor: pointer;
+    font-size: 0.95rem;
+    transition: background-color 0.3s ease;
+    margin: 0 5px;
 }
 button:hover {
     background-color: #0056b3;
+}
+
+input.search {
+    padding: 8px 12px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    margin: 10px 0;
+    width: 250px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: white;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    border-radius: 8px;
+    overflow: hidden;
+    margin-top: 20px;
+}
+
+th, td {
+    padding: 12px;
+    text-align: center;
+    border-bottom: 1px solid #dee2e6;
+}
+
+th {
+    background-color: #f1f3f5;
+    color: #495057;
+    font-size: 1rem;
 }
 
 .modal {
@@ -40,56 +81,49 @@ button:hover {
 
 .modal-content {
     background-color: white;
-    padding: 20px;
-    border-radius: 10px;
-    width: 40%;
-    max-width: 500px;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+    padding: 25px;
+    border-radius: 12px;
+    width: 90%;
+    max-width: 450px;
     text-align: center;
-    position: relative;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
     animation: fadeIn 0.3s ease-in-out;
+    position: relative;
 }
 
 @keyframes fadeIn {
-    from {
-        transform: scale(0.9);
-        opacity: 0;
-    }
-    to {
-        transform: scale(1);
-        opacity: 1;
-    }
+    from { opacity: 0; transform: scale(0.95); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+.modal-content h2 {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+}
+
+.modal-content img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    object-fit: cover;
+}
+
+.modal-content p {
+    font-size: 1.2rem;
+    color: #444;
 }
 
 .close {
     position: absolute;
     top: 10px;
     right: 15px;
-    font-size: 20px;
+    font-size: 24px;
     cursor: pointer;
-    color: black;
+    color: #aaa;
 }
 .close:hover {
-    color: red;
-}
-
-.modal-content h2 {
-    font-family: Helvetica;
-    font-size: 1.5rem;
-    margin-bottom: 10px;
-}
-
-.modal-content img {
-    width: 100%;
-    max-height: 300px;
-    object-fit: cover;
-    border-radius: 5px;
-}
-deaf
-.modal-content p {
-    font-family: Helvetica;
-    font-size: 1.5rem;
-    margin-top: 10px;
+    color: #ff4d4d;
 }
 
 .msg {
@@ -97,15 +131,13 @@ deaf
     bottom: 20px;
     left: 50%;
     transform: translateX(-50%);
-    background-color: #28a745;
+    padding: 12px 24px;
+    border-radius: 8px;
     color: white;
-    padding: 10px 20px;
-    border-radius: 5px;
-    font-family: Helvetica;
     font-weight: bold;
-
-    transition: opacity 0.3s ease;
+    font-size: 1rem;
     z-index: 1000;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
 }
 
 .msg.success {
@@ -113,7 +145,7 @@ deaf
 }
 
 .msg.error {
-    background-color: red;
+    background-color: #dc3545;
 }
 
 .hidden {
@@ -121,8 +153,30 @@ deaf
 }
 
 .book-stats {
-    margin-top: 20px;
-    font-weight: bold;
+    margin-top: 30px;
+    font-size: 1.1rem;
+    color: #343a40;
     text-align: center;
+}
+
+.filters {
+    border: 1px solid #ccc;
+    padding: 15px 20px;
+    border-radius: 10px;
+    margin-bottom: 25px;
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.filters legend {
+    font-weight: bold;
     color: #007BFF;
+    padding: 0 10px;
+    font-size: 1.1rem;
+}
+
+.filters input,
+.filters select,
+.filters button {
+    margin: 5px 10px 5px 0;
 }

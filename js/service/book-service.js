@@ -2,11 +2,15 @@
 
 
 const STORAGE_KEY = 'bookShopDB'
-var gSearchFilter = ''
+
+var gFilterBy = {
+    title: '',
+    minRating: 0
+}
 
 var gBooks = [
-    { id: 'bg4J78', title: 'The Adventures of Lori IpsiA', price: 129, imgUrl: 'img/lori-ipsi.jpg' },
-    { id: 'gh6K89', title: 'JavaScript for BeginnersA', price: 99, imgUrl: 'img/js-beginners.jpg' }
+    { id: 'bg4J78', title: 'The Adventures of Lori IpsiA', price: 129, rating: 2, imgUrl: 'img/lori-ipsi.jpg' },
+    { id: 'gh6K89', title: 'JavaScript for BeginnersA', price: 99, rating: 5, imgUrl: 'img/js-beginners.jpg' }
 ];
 
 function _createBooks() {
@@ -22,11 +26,12 @@ function _createBooks() {
 _createBooks()
 renderBooks()
 
-function _createBook(title, price, imgUrl) {
+function _createBook(title, price, rating, imgUrl) {
     return {
         id: makeId(),
         title,
         price,
+        rating,
         imgUrl
     }
 }
@@ -36,10 +41,10 @@ function _saveBooks() {
 }
 
 function getBooks() {
-    if (!gSearchFilter) return gBooks;
-
     return gBooks.filter(book =>
-        book.title.toLowerCase().includes(gSearchFilter.toLowerCase()))
+        book.title.toLowerCase().includes(gFilterBy.title.toLowerCase()) &&
+        book.rating >= gFilterBy.minRating
+    );
 }
 
 function removeBook(bookid) {
@@ -75,6 +80,7 @@ function addBook() {
         id: makeId(),
         title: newBookTitle,
         price: newBookPrice,
+        rating: Math.floor(Math.random() * 5) + 1,
         imgUrl: 'img/default.png'
     }
 
@@ -88,19 +94,6 @@ function addBook() {
 
 function getBookById(bookid) {
     return gBooks.find(book => book.id === bookid)
-}
-
-function onSetFilter(value) {
-    gSearchFilter = value
-    renderBooks()
-    renderStats()
-}
-
-function onClearFilter() {
-    gSearchFilter = ''
-    document.querySelector('.search').value = ''
-    renderBooks()
-    renderStats()
 }
 
 function showMsg(txt, isError = true){

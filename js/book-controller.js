@@ -15,7 +15,8 @@ function renderBooks() {
     var strHTMLs = books.map(book => `
         <tr>
             <td>${book.title}</td>
-            <td>${book.price}</td>
+            <td>$${book.price}</td>
+            <td>${book.rating}</td>
             <td>
                 <button onclick="onReadBook('${book.id}')">Read</button>
                 <button onclick="onUpdateBook('${book.id}')">Update</button>
@@ -57,7 +58,9 @@ function onReadBook(bookid) {
     if(!book) return console.log('Error: book not found!')
 
     document.querySelector('#modalTitle').innerText = book.title
-    document.querySelector('#modalPrice').innerText = 'Price: ' + book.price
+    document.querySelector('#modalPrice').innerText = 'Price: $' + book.price
+    document.querySelector('#modalRating').innerText = 'Rating: ' + book.rating + ' ⭐';
+
     document.querySelector('#modalImg').src = book.imgUrl
 
     document.querySelector('#bookDetailsModal').style.display = 'flex';
@@ -66,4 +69,29 @@ function onReadBook(bookid) {
 
 function closeModal() {
     document.querySelector('#bookDetailsModal').style.display = 'none'
+}
+
+
+function onSetFilter(title) {
+    gFilterBy.title = title
+    renderBooks()
+    renderStats()
+}
+
+function onSetFilterByRating(minRating){
+    gFilterBy.minRating = +minRating
+    renderBooks()
+    renderStats()
+}
+
+function onClearFilter() {
+    gFilterBy = {
+        title: '',
+        minRating: 0
+    }
+    
+    document.querySelector('.search').value = ''
+    document.querySelector('.min-rating').value = 0
+    renderBooks()
+    renderStats()
 }
