@@ -42,11 +42,32 @@ function _saveBooks() {
 }
 
 function getBooks() {
-    return gBooks.filter(book =>
-        book.title.toLowerCase().includes(gFilterBy.filterBy.title.toLowerCase()) &&
-        book.rating >= gFilterBy.filterBy.minRating
-    );
+    const filterBy = gFilterBy.filterBy
+    const sortBy = gFilterBy.sortBy
+    const page = gFilterBy.page
+
+    var books = gBooks
+
+    books = books.filter(book =>
+        book.title.toLowerCase().includes(filterBy.title.toLowerCase()) &&
+        book.rating >= filterBy.minRating
+    )
+
+    if (sortBy.prop) {
+        const { prop, dir } = sortBy
+        if (prop === 'title') {
+            books.sort((a, b) => a.title.localeCompare(b.title) * dir)
+        } else {
+            books.sort((a, b) => (a[prop] - b[prop]) * dir)
+        }
+    }
+
+    const startIdx = page.idx * page.size
+    books = books.slice(startIdx, startIdx + page.size)
+
+    return books
 }
+
 
 function removeBook(bookid) {
     var bookIdx = gBooks.findIndex(book => book.id === bookid)

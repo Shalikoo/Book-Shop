@@ -8,7 +8,7 @@ function onInit() {
 }
 
 function renderBooks() {
-    var books = getBooks()
+    var books = getBooks(gFilterBy)
 
     if(books.length === 0){
         showMsg('Error: no search results!', true)
@@ -30,7 +30,7 @@ function renderBooks() {
 }
 
 function renderStats() {
-    const books = getBooks()
+    const books = getBooks(gFilterBy)
 
     const expensiveCount = books.filter(book => book.price > 200).length
     const averageCount = books.filter(book => book.price >= 80 && book.price <= 200).length
@@ -86,6 +86,19 @@ function onSetFilterByRating(minRating){
     setQueryParams()
     renderBooks()
     renderStats()
+}
+
+function onSetSortBy(prop) {
+    gFilterBy.sortBy.prop = prop
+    setQueryParams()
+    renderBooks()
+}
+
+
+function onSetSortDir(dir) {
+    gFilterBy.sortBy.dir = +dir
+    setQueryParams()
+    renderBooks()
 }
 
 function onClearFilter() {
