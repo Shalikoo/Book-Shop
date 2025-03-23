@@ -85,7 +85,7 @@ button:hover {
     object-fit: cover;
     border-radius: 5px;
 }
-
+deaf
 .modal-content p {
     font-family: Helvetica;
     font-size: 1.5rem;
@@ -124,5 +124,5 @@ button:hover {
     margin-top: 20px;
     font-weight: bold;
     text-align: center;
-    color: #333;
+    color: #007BFF;
 }

@@ -58,7 +58,7 @@ function onReadBook(bookid) {
 
     document.querySelector('#modalTitle').innerText = book.title
     document.querySelector('#modalPrice').innerText = 'Price: ' + book.price
-    document.querySelector('#modalImg').src = book.imgUrl || 'default.png'
+    document.querySelector('#modalImg').src = book.imgUrl
 
     document.querySelector('#bookDetailsModal').style.display = 'flex';
     

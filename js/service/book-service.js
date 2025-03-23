@@ -75,7 +75,7 @@ function addBook() {
         id: makeId(),
         title: newBookTitle,
         price: newBookPrice,
-        imgUrl: 'default.png'
+        imgUrl: 'img/default.png'
     }
 
     if (!newBookTitle || !newBookPrice || newBookPrice <= 0 ) return console.log('Error: please try again!')
