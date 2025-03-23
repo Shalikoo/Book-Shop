@@ -49,6 +49,8 @@ function removeBook(bookid) {
         gBooks.splice(bookIdx, 1)
         _saveBooks()
         renderBooks()
+        renderStats()
+        showMsg('Book removed successfully', false)
     }
 }
 
@@ -61,6 +63,8 @@ function updateBook(bookid, newPrice){
     gBooks[bookIdx].price = newPrice
     _saveBooks()
     renderBooks()
+    renderStats()
+    showMsg('Book updated successfully', false)
 }
 
 function addBook() {
@@ -78,6 +82,8 @@ function addBook() {
     gBooks.push(newBook)
     _saveBooks()
     renderBooks()
+    renderStats()
+    showMsg('Book added successfully', false)
 }
 
 function getBookById(bookid) {
@@ -87,14 +93,32 @@ function getBookById(bookid) {
 function onSetFilter(value) {
     gSearchFilter = value
     renderBooks()
+    renderStats()
 }
 
 function onClearFilter() {
     gSearchFilter = ''
     document.querySelector('.search').value = ''
     renderBooks()
+    renderStats()
 }
 
-function successMessage(){
+function showMsg(txt, isError = true){
+    const elMsg = document.getElementById('msg')
+
+    elMsg.innerText = txt
+    elMsg.classList.remove('error', 'success')
+    elMsg.classList.remove('hidden')
+    
+
+    if(isError){
+        elMsg.classList.add('error')
+    } else {
+        elMsg.classList.add('success')
+    }
+
+    setTimeout(() => {
+        elMsg.classList.add('hidden')
+    }, 2000);
     
 }

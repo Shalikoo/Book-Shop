@@ -24,6 +24,8 @@
     <input type="text" class="search" placeholder="Search by title" oninput="onSetFilter(this.value)">
     <button onclick="onClearFilter()">Clear</button>
 
+    <div id="msg" class="msg hidden"></div>
+
     <table border="1">
         <thead>
             <tr>
@@ -35,6 +37,8 @@
         <tbody>
         </tbody>
     </table>
+    
+    <div id="stats" class="book-stats"></div>
 
     <script src="js/book-controller.js"></script>
     <script src="js/service/storage-service.js"></script>

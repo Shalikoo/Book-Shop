@@ -2,10 +2,16 @@
 
 function onInit() {
     renderBooks()
+    renderStats()
 }
 
 function renderBooks() {
     var books = getBooks()
+
+    if(books.length === 0){
+        showMsg('Error: no search results!', true)
+    }
+
     var strHTMLs = books.map(book => `
         <tr>
             <td>${book.title}</td>
@@ -18,6 +24,17 @@ function renderBooks() {
         </tr>
         `)
         document.querySelector('tbody').innerHTML = strHTMLs.join('')
+}
+
+function renderStats() {
+    const books = getBooks()
+
+    const expensiveCount = books.filter(book => book.price > 200).length
+    const averageCount = books.filter(book => book.price >= 80 && book.price <= 200).length
+    const cheapCount = books.filter(book => book.price < 80).length
+
+    const elStats = document.getElementById('stats')
+    elStats.innerText = `Expensive: ${expensiveCount} | Average: ${averageCount} | Cheap: ${cheapCount}`
 }
 
 function onRemoveBook(bookid) {

@@ -32,7 +32,7 @@ button:hover {
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5);
-    
+
     display: flex;
     justify-content: center;
     align-items: center;
@@ -74,6 +74,7 @@ button:hover {
 }
 
 .modal-content h2 {
+    font-family: Helvetica;
     font-size: 1.5rem;
     margin-bottom: 10px;
 }
@@ -86,6 +87,42 @@ button:hover {
 }
 
 .modal-content p {
-    font-size: 1.2rem;
+    font-family: Helvetica;
+    font-size: 1.5rem;
     margin-top: 10px;
+}
+
+.msg {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #28a745;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-family: Helvetica;
+    font-weight: bold;
+
+    transition: opacity 0.3s ease;
+    z-index: 1000;
+}
+
+.msg.success {
+    background-color: #28a745;
+}
+
+.msg.error {
+    background-color: red;
+}
+
+.hidden {
+    display: none;
+}
+
+.book-stats {
+    margin-top: 20px;
+    font-weight: bold;
+    text-align: center;
+    color: #333;
 }
