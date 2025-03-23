@@ -2,7 +2,7 @@
 
 
 const STORAGE_KEY = 'bookShopDB'
-
+var gSearchFilter = ''
 
 var gBooks = [
     { id: 'bg4J78', title: 'The Adventures of Lori IpsiA', price: 129, imgUrl: 'img/lori-ipsi.jpg' },
@@ -36,7 +36,10 @@ function _saveBooks() {
 }
 
 function getBooks() {
-    return gBooks
+    if (!gSearchFilter) return gBooks;
+
+    return gBooks.filter(book =>
+        book.title.toLowerCase().includes(gSearchFilter.toLowerCase()))
 }
 
 function removeBook(bookid) {
@@ -79,4 +82,19 @@ function addBook() {
 
 function getBookById(bookid) {
     return gBooks.find(book => book.id === bookid)
+}
+
+function onSetFilter(value) {
+    gSearchFilter = value
+    renderBooks()
+}
+
+function onClearFilter() {
+    gSearchFilter = ''
+    document.querySelector('.search').value = ''
+    renderBooks()
+}
+
+function successMessage(){
+    
 }

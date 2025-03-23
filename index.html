@@ -21,7 +21,9 @@
 
     <h1>Book Shop</h1>
     <button onclick="onAddBook()">Add Book</button>
-    
+    <input type="text" class="search" placeholder="Search by title" oninput="onSetFilter(this.value)">
+    <button onclick="onClearFilter()">Clear</button>
+
     <table border="1">
         <thead>
             <tr>
