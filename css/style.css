@@ -185,10 +185,25 @@ th {
     font-size: 1.1rem;
 }
 
-.filters input,
-.filters select,
-.filters button {
+.filters select {
+    background-color: #ffffff;
+    color: #007BFF;
+    border: 1px solid #007BFF;
+    padding: 8px 12px;
+    border-radius: 8px;
     margin: 5px 10px 5px 0;
+    width: 180px;
+    text-align: left;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.filters select:hover,
+.filters select:focus {
+    background-color: #007BFF;
+    color: #fff;
+    outline: none;
 }
 
 .sort-controls {
@@ -209,8 +224,28 @@ th {
 
 .sort-controls select,
 .sort-controls label {
-    margin-right: 15px;
+    background-color: #ffffff;
+    color: #007BFF;
+    border: 1px solid #007BFF;
+    padding: 8px 12px;
+    border-radius: 8px;
+    margin: 5px 10px 5px 0;
+    width: 180px;
+    text-align: left;
     font-size: 1rem;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.sort-controls select:hover {
+    background-color: #007BFF;
+    color: #fff;
+    outline: none;
+}
+.sort-controls label:hover {
+    background-color: #007BFF;
+    color: #fff;
+    outline: none;
 }
 
 .sort-controls input[type="radio"] {
@@ -226,10 +261,26 @@ th {
 }
 
 dialog.book-edit-modal {
-	padding: 2em;
-	background: linear-gradient(to bottom, #eee, #fff);
-	border: 1px solid lightgray;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    
+    text-align: center;
+    padding: 2em;
+    background: white;
+    border: none;
+    border-radius: 12px;
+    width: 90%;
+    max-width: 450px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    z-index: 999;
 }
+
+.book-edit-modal::backdrop {
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
 
 dialog.book-edit-modal form {
 	display: flex;
@@ -239,28 +290,19 @@ dialog.book-edit-modal form {
 
 dialog.book-edit-modal form > h2 {
 	margin-block-end: 0.5em;
+    color: #007BFF;
 }
 
-dialog.book-edit-modal form > img {
-	position: absolute;
-	top: 30px;
-	right: 20px;
-
-	width: 130px;
-}
-
-dialog.book-edit-modal form > input,
-dialog.book-edit-modal form > select {
-	align-self: start;
-	height: 1.6em;
+dialog.book-edit-modal form > input {
+	align-self: center;
+	height: 2.6em;
 	border: 1px solid lightgray;
+    width: 60%;
+    border-radius: 15px;
+    text-align: center;
 }
 
 dialog.book-edit-modal form .actions {
 	margin-block-start: 1em;
-}
-
-dialog *:focus {
-	outline: 1px solid gray;
 }
 
