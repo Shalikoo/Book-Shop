@@ -66,7 +66,7 @@ th {
     font-size: 1rem;
 }
 
-.modal {
+.view-modal {
     display: none;
     position: fixed;
     z-index: 999;
@@ -224,3 +224,43 @@ th {
     color: #343a40;
     text-align: center;
 }
+
+dialog.book-edit-modal {
+	padding: 2em;
+	background: linear-gradient(to bottom, #eee, #fff);
+	border: 1px solid lightgray;
+}
+
+dialog.book-edit-modal form {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+}
+
+dialog.book-edit-modal form > h2 {
+	margin-block-end: 0.5em;
+}
+
+dialog.book-edit-modal form > img {
+	position: absolute;
+	top: 30px;
+	right: 20px;
+
+	width: 130px;
+}
+
+dialog.book-edit-modal form > input,
+dialog.book-edit-modal form > select {
+	align-self: start;
+	height: 1.6em;
+	border: 1px solid lightgray;
+}
+
+dialog.book-edit-modal form .actions {
+	margin-block-start: 1em;
+}
+
+dialog *:focus {
+	outline: 1px solid gray;
+}
+

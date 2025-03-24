@@ -18,7 +18,7 @@ function _createBooks() {
     var storedBooks = loadFromStorage(STORAGE_KEY)
 
     if (!storedBooks || storedBooks.length === 0) { 
-        saveToStorage(STORAGE_KEY, gBooks)
+        _saveBooks()
     } else {
         gBooks = storedBooks;
     }
@@ -94,30 +94,6 @@ function updateBook(bookid, newPrice){
     showMsg('Book updated successfully', false)
 }
 
-function addBook() {
-    var newBookTitle = prompt('Please enter title')
-    var newBookPrice = +prompt('Please enter price')
-    
-    var newBook = {
-        id: makeId(),
-        title: newBookTitle,
-        price: newBookPrice,
-        rating: Math.floor(Math.random() * 5) + 1,
-        imgUrl: 'img/default.png'
-    }
-
-    if (!newBookTitle || !newBookPrice || newBookPrice <= 0 ) return console.log('Error: please try again!')
-    gBooks.push(newBook)
-    _saveBooks()
-    renderBooks()
-    renderStats()
-    showMsg('Book added successfully', false)
-}
-
-function getBookById(bookid) {
-    return gBooks.find(book => book.id === bookid)
-}
-
 function showMsg(txt, isError = true){
     const elMsg = document.getElementById('msg')
 
@@ -137,3 +113,23 @@ function showMsg(txt, isError = true){
     }, 2000);
     
 }
+
+function getPageCount() {
+    const { filterBy, page } = gFilterBy
+    const books = gBooks.filter(book =>
+        book.title.toLowerCase().includes(filterBy.title.toLowerCase()) &&
+        book.rating >= filterBy.minRating
+    )
+    return Math.ceil(books.length / page.size)
+}
+
+// function getPageCount(options) {
+//     const page = options.page
+//     const filterBy = options.filterBy
+
+//     const books = _filterBooks(filterBy)
+
+//     const pageCount = Math.ceil(books.length / page.size)
+
+//     return pageCount
+// }

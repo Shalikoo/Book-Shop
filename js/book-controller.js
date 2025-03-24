@@ -27,6 +27,7 @@ function renderBooks() {
         </tr>
         `)
         document.querySelector('tbody').innerHTML = strHTMLs.join('')
+        updatePaginationDisplay()
 }
 
 function renderStats() {
@@ -51,13 +52,56 @@ function onUpdateBook(bookid) {
 }
 
 function onAddBook() {
-    addBook()
+    const elModal = document.querySelector('.book-edit-modal')
+    elModal.showModal()
+}
+
+function onCloseBookEditModal() {
+    const elModal = document.querySelector('.book-edit-modal')
+    elModal.close()
+    resetBookEditModal()
+}
+
+function resetBookEditModal() {
+    const elForm = document.querySelector('.book-edit-modal form')
+    const elTitle = elForm.querySelector('input.title')
+    const elPrice = elForm.querySelector('input.price')
+    const elRating = elForm.querySelector('input.rating')
+
+    elTitle.value = ''
+    elPrice.value = ''
+    elRating.value = ''
+}
+
+function onSaveBook() {
+    const title = document.querySelector('.book-edit-modal .title').value
+    const price = +document.querySelector('.book-edit-modal .price').value
+    const rating = +document.querySelector('.book-edit-modal .rating').value
+
+    if (!title || !price || price <= 0 || !rating) {
+        showMsg('Error: please fill all fields correctly', true)
+        return
+    }
+
+    const book = {
+        id: makeId(),
+        title,
+        price,
+        rating,
+        imgUrl: 'img/default.png'
+    }
+
+    gBooks.push(book)
+    _saveBooks()
+    onCloseBookEditModal()
     renderBooks()
+    renderStats()
+    showMsg('Book added successfully', false)
 }
 
 function onReadBook(bookid) {
     var book = getBookById(bookid)
-    if(!book) return console.log('Error: book not found!')
+    if(!book) return console.log('Error: book not found')
 
     document.querySelector('#modalTitle').innerText = book.title
     document.querySelector('#modalPrice').innerText = 'Price: $' + book.price
@@ -94,7 +138,6 @@ function onSetSortBy(prop) {
     renderBooks()
 }
 
-
 function onSetSortDir(dir) {
     gFilterBy.sortBy.dir = +dir
     setQueryParams()
@@ -115,66 +158,28 @@ function onClearFilter() {
     renderStats()
 }
 
-function _filterBooks(filterBy) {
-    var books = gBooks
-    if (filterBy.title) {
-        books = books.filter(book => book.title.includes(gFilterBy.title))
-    }
-    if (filterBy.minRating) {
-        books = books.filter(book => book.minRating >= gFilterBy.minRating)
-    }
-    return books
-}
-
-function getPageCount(options) {
-    const page = options.page
-    const filterBy = options.filterBy
-    // console.log('page:', page)
-    // console.log('gCars:', gCars)
-
-    const books = _filterBooks(filterBy)
-    // console.log('cars:', cars)
-
-    const pageCount = Math.ceil(books.length / page.size)
-    // console.log('pageCount:', pageCount)
-    return pageCount
+function updatePaginationDisplay() {
+    const pageCount = getPageCount(gFilterBy)
+    const currPage = gFilterBy.page.idx + 1
+    const elPage = document.querySelector('.pagination')
+    elPage.innerText = `Page: ${currPage} / ${pageCount}`
 }
 
 function onNextPage() {
-    // console.log('Getting next page...')
-
     const pageCount = getPageCount(gFilterBy)
-
-    if (gFilterBy.page.idx === pageCount - 1) {
-        gFilterBy.page.idx = 0
-    } else {
-        gFilterBy.page.idx++
-    }
-
-    // console.log('gQueryOptions.page:', gQueryOptions.page)
-    renderStats()
+    gFilterBy.page.idx = (gFilterBy.page.idx + 1) % pageCount
     renderBooks()
+    renderStats()
     setQueryParams()
 }
 
 function onPrevPage() {
-    // console.log('Getting next page...')
-
     const pageCount = getPageCount(gFilterBy)
-
-    if (gFilterBy.page.idx <= 0) {
-        gFilterBy.page.idx = pageCount - 1
-    } else {
-        gFilterBy.page.idx--
-    }
-
-    // console.log('gQueryOptions.page:', gQueryOptions.page)
-    renderStats()
+    gFilterBy.page.idx = (gFilterBy.page.idx - 1 + pageCount) % pageCount
     renderBooks()
+    renderStats()
     setQueryParams()
 }
-
-// Query Params
 
 function readQueryParams() {
     const queryParams = new URLSearchParams(window.location.search)
